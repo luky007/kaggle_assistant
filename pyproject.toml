@@ -1,0 +1,152 @@
+[tool.poetry]
+name = "kaggle_ssh"
+version = "0.1.0"
+description = "Use kaggle inside vscode throughout ssh"
+authors = ["luky007 <87906952+luky007@users.noreply.github.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+spur = "^0.3.23"
+lxml = "^5.1.0"
+pytest-playwright = "^0.4.4"
+rich = "^13.7.1"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pyright = "^1.1.351"
+mypy = "^1.8.0"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.5.3"
+mkdocs-material = {extras = ["imaging"], version = "^9.5.6"}
+mkdocstrings = {extras = ["python"], version = "^0.24.0"}
+mkdocs-mermaid2-plugin = "^1.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python version
+target-version = "py310"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = ["E4", "E7", "E9", "F",
+"D", # use pycodestyle 
+"W", "C90", "I", "N", "UP", "YTT", "ANN", "ASYNC", "BLE", "B", "A", "COM", "C4", "EXE", "FA", "ISC", "ICN", "INP", "PIE", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "ARG", "PTH", "TD", "FIX", "PD", "PL", "TRY", "FLY", "NPY", "PERF", "FURB", "RUF" # python config strict
+]
+ignore = [
+    "E501", # disable line length warning
+    "EXE002", # disable shebang required in unix
+    "I001", "ANN401", "SIM300", "PERF203", "ANN101", "B905", "NPY002", "COM812", "N999", "PTH", "INP001", "TRY003", "PLW1641" # python config strict
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.ruff.mccabe]
+max-complexity = 24
+[tool.ruff.pycodestyle]
+ignore-overlong-task-comments = true
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.ruff.isort]
+force-single-line = false # changed
+force-sort-within-sections = false
+lines-after-imports = 2
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.isort.sections]
+known-first-party = []
+known-local-folder = []
+known-third-folder = [
+  "numpy",
+  "pandas",
+  "keras",
+  "tensorflow",
+  "sklearn",
+  "matplotlib",
+  "scipy",
+  "h5py",
+  "seaborn",
+  "numba",
+  "gym",
+  "PyQt5",
+  "PyQt6",
+  "pyqtgraph",
+  "torch",
+  "tqdm",
+  "cv2",
+  "skimage",
+  "tensorcross",
+  "tensorflow_datasets",
+]
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 110
+#disable = """too-many-arguments,"""
+
+[tool.mypy]
+# Platform configuration
+python_version = "3.10"
+strict = true
+exclude = ["docs", "test", "tests"]
+ignore_missing_imports = true
+
+[tool.pyright]
+pythonVersion = "3.10"
+#typeCheckingMode = "basic"
+typeCheckingMode = "strict"
+exclude = ["docs", "setup.py"]
+
+
